@@ -104,6 +104,7 @@ void flb_net_setup_init(struct flb_net_setup *net)
     net->dns_mode = NULL;
     net->dns_resolver = NULL;
     net->dns_prefer_ipv4 = FLB_FALSE;
+    net->dns_async = FLB_TRUE;
     net->keepalive = FLB_TRUE;
     net->keepalive_idle_timeout = 30;
     net->keepalive_max_recycle = 0;
@@ -1199,7 +1200,7 @@ flb_sockfd_t flb_net_tcp_connect(const char *host, unsigned long port,
     /* fomart the TCP port */
     snprintf(_port, sizeof(_port), "%lu", port);
 
-    use_async_dns = is_async;
+    use_async_dns = is_async && u_conn->u->net.dns_async;
 
     if (u_conn->u->net.dns_resolver != NULL) {
         resolver_initial = toupper(u_conn->u->net.dns_resolver[0]);

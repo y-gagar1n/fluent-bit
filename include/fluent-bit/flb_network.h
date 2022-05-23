@@ -59,6 +59,8 @@ struct flb_net_setup {
 
     /* prioritize ipv4 results when trying to establish a connection*/
     int   dns_prefer_ipv4;
+
+    int dns_async;
 };
 
 /* Defines a host service and it properties */

@@ -120,6 +120,10 @@ struct flb_service_config service_configs[] = {
      FLB_CONF_TYPE_BOOL,
      offsetof(struct flb_config, dns_prefer_ipv4)},
 
+    {FLB_CONF_DNS_ASYNC,
+     FLB_CONF_TYPE_BOOL,
+     offsetof(struct flb_config, dns_async)},
+
     /* Storage */
     {FLB_CONF_STORAGE_PATH,
      FLB_CONF_TYPE_STR,

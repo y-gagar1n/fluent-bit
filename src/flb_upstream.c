@@ -52,6 +52,12 @@ struct flb_config_map upstream_net[] = {
     },
 
     {
+    FLB_CONFIG_MAP_BOOL, "net.dns.async", "true",
+    0, FLB_TRUE, offsetof(struct flb_net_setup, dns_async),
+    "Use asynchronous DNS resolving"
+    },
+
+    {
      FLB_CONFIG_MAP_BOOL, "net.keepalive", "true",
      0, FLB_TRUE, offsetof(struct flb_net_setup, keepalive),
      "Enable or disable Keepalive support"
@@ -141,6 +147,13 @@ struct mk_list *flb_upstream_get_config_map(struct flb_config *config)
                 upstream_net[config_index].def_value = "true";
             }
         }
+
+      if (config->dns_async) {
+            if (strcmp(upstream_net[config_index].name,
+                      "net.dns.async") == 0) {
+                upstream_net[config_index].def_value = "true";
+        }
+      }
     }
 
     config_map = flb_config_map_create(config, upstream_net);
